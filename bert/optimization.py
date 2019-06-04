@@ -106,7 +106,7 @@ class AdamWeightDecayOptimizer(tf.train.Optimizer):
     """See base class."""
     assignments = []
     for (grad, param) in grads_and_vars:
-      if grad is None or param is None:
+      if grad is None or param is None:  # or param.name.startswith("bert")  将这个判断条件加入到之前，就不会训练Bert的参数。
         continue
 
       param_name = self._get_variable_name(param.name)
